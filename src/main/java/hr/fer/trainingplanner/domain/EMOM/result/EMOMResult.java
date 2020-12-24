@@ -14,4 +14,7 @@ public class EMOMResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public EMOMResult(EMOMResultRequest request) {
+    }
 }

@@ -6,4 +6,7 @@ import lombok.Data;
 public class ForTimeResultResponse {
 
     private Long id;
+
+    public ForTimeResultResponse(ForTimeResult forTimeResult) {
+    }
 }

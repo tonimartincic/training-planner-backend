@@ -6,4 +6,7 @@ import lombok.Data;
 public class UserResponse {
 
     private Long id;
+
+    public UserResponse(User user) {
+    }
 }

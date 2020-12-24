@@ -14,4 +14,7 @@ public class ForTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public ForTime(ForTimeRequest request) {
+    }
 }

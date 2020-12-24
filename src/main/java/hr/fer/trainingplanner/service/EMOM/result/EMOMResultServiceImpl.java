@@ -1,5 +1,6 @@
 package hr.fer.trainingplanner.service.EMOM.result;
 
+import com.google.common.collect.Lists;
 import hr.fer.trainingplanner.domain.EMOM.result.EMOMResult;
 import hr.fer.trainingplanner.domain.EMOM.result.EMOMResultRequest;
 import hr.fer.trainingplanner.domain.EMOM.result.EMOMResultResponse;
@@ -7,6 +8,7 @@ import hr.fer.trainingplanner.repository.EMOM.result.EMOMResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,27 +25,37 @@ public class EMOMResultServiceImpl implements EMOMResultService {
 
     @Override
     public List<EMOMResultResponse> getAll() {
-        return null;
+        return getResponses(Lists.newArrayList(this.EMOMResultRepository.findAll()));
     }
 
     @Override
     public EMOMResultResponse getById(Long id) {
-        return null;
+        return getResponse(this.EMOMResultRepository.findById(id));
     }
 
     @Override
     public EMOMResultResponse add(EMOMResultRequest request) {
-        return null;
+        final EMOMResult entity = new EMOMResult(request);
+        return getResponse(Optional.of(this.EMOMResultRepository.save(entity)));
     }
 
     @Override
     public EMOMResultResponse edit(EMOMResultRequest request) {
-        return null;
+        final Optional<EMOMResult> entityFromDatabase = this.EMOMResultRepository.findById(request.getId());
+        if (entityFromDatabase.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+
+        final EMOMResult entity = entityFromDatabase.get();
+
+        // TODO: update data
+
+        return getResponse(Optional.of(this.EMOMResultRepository.save(entity)));
     }
 
     @Override
     public void deleteById(Long id) {
-
+        this.EMOMResultRepository.deleteById(id);
     }
 
     private List<EMOMResultResponse> getResponses(final List<EMOMResult> entities) {

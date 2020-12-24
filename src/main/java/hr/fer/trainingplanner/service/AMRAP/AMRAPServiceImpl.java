@@ -8,6 +8,7 @@ import hr.fer.trainingplanner.repository.AMRAP.AMRAPRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,22 +30,32 @@ public class AMRAPServiceImpl implements AMRAPService {
 
     @Override
     public AMRAPResponse getById(Long id) {
-        return null;
+        return getResponse(this.AMRAPRepository.findById(id));
     }
 
     @Override
     public AMRAPResponse add(AMRAPRequest request) {
-        return null;
+        final AMRAP entity = new AMRAP(request);
+        return getResponse(Optional.of(this.AMRAPRepository.save(entity)));
     }
 
     @Override
     public AMRAPResponse edit(AMRAPRequest request) {
-        return null;
+        final Optional<AMRAP> entityFromDatabase = this.AMRAPRepository.findById(request.getId());
+        if (entityFromDatabase.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+
+        final AMRAP entity = entityFromDatabase.get();
+
+        // TODO: update data
+
+        return getResponse(Optional.of(this.AMRAPRepository.save(entity)));
     }
 
     @Override
     public void deleteById(Long id) {
-
+        this.AMRAPRepository.deleteById(id);
     }
 
     private List<AMRAPResponse> getResponses(final List<AMRAP> entities) {

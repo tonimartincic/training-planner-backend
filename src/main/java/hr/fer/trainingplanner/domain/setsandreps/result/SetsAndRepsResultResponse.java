@@ -6,4 +6,7 @@ import lombok.Data;
 public class SetsAndRepsResultResponse {
 
     private Long id;
+
+    public SetsAndRepsResultResponse(SetsAndRepsResult setsAndRepsResult) {
+    }
 }

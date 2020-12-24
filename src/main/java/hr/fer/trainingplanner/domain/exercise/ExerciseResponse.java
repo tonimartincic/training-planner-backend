@@ -8,6 +8,6 @@ public class ExerciseResponse {
 
     private Long id;
 
-    public ExerciseResponse(AMRAPResult amrapResult) {
+    public ExerciseResponse(Exercise exercise) {
     }
 }

@@ -6,4 +6,7 @@ import lombok.Data;
 public class TabataResultResponse {
 
     private Long id;
+
+    public TabataResultResponse(TabataResult tabataResult) {
+    }
 }

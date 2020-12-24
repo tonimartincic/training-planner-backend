@@ -41,12 +41,12 @@ public class AMRAPResultServiceImpl implements AMRAPResultService {
 
     @Override
     public AMRAPResultResponse edit(final AMRAPResultRequest request) {
-        final Optional<AMRAPResult> AMRAPResultFromDatabase = this.AMRAPResultRepository.findById(request.getId());
-        if (AMRAPResultFromDatabase.isEmpty()) {
+        final Optional<AMRAPResult> entityFromDatabase = this.AMRAPResultRepository.findById(request.getId());
+        if (entityFromDatabase.isEmpty()) {
             throw new EntityNotFoundException();
         }
 
-        final AMRAPResult entity = AMRAPResultFromDatabase.get();
+        final AMRAPResult entity = entityFromDatabase.get();
 
         // TODO: update data
 

@@ -1,12 +1,17 @@
 package hr.fer.trainingplanner.service.fortime;
 
+import com.google.common.collect.Lists;
+import hr.fer.trainingplanner.domain.fortime.ForTime;
 import hr.fer.trainingplanner.domain.fortime.ForTimeRequest;
 import hr.fer.trainingplanner.domain.fortime.ForTimeResponse;
 import hr.fer.trainingplanner.repository.fortime.ForTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ForTimeServiceImpl implements ForTimeService {
@@ -20,44 +25,54 @@ public class ForTimeServiceImpl implements ForTimeService {
 
     @Override
     public List<ForTimeResponse> getAll() {
-        return null;
+        return getResponses(Lists.newArrayList(this.forTimeRepository.findAll()));
     }
 
     @Override
     public ForTimeResponse getById(Long id) {
-        return null;
+        return getResponse(this.forTimeRepository.findById(id));
     }
 
     @Override
     public ForTimeResponse add(ForTimeRequest request) {
-        return null;
+        final ForTime entity = new ForTime(request);
+        return getResponse(Optional.of(this.forTimeRepository.save(entity)));
     }
 
     @Override
     public ForTimeResponse edit(ForTimeRequest request) {
-        return null;
+        final Optional<ForTime> entityFromDatabase = this.forTimeRepository.findById(request.getId());
+        if (entityFromDatabase.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+
+        final ForTime entity = entityFromDatabase.get();
+
+        // TODO: update data
+
+        return getResponse(Optional.of(this.forTimeRepository.save(entity)));
     }
 
     @Override
     public void deleteById(Long id) {
-
+        this.forTimeRepository.deleteById(id);
     }
 
-    private List<AMRAPResultResponse> getResponses(final List<AMRAPResult> entities) {
-        final List<AMRAPResultResponse> responses = new ArrayList<>();
+    private List<ForTimeResponse> getResponses(final List<ForTime> entities) {
+        final List<ForTimeResponse> responses = new ArrayList<>();
 
-        for (final AMRAPResult entity : entities) {
+        for (final ForTime entity : entities) {
             responses.add(getResponse(Optional.ofNullable(entity)));
         }
 
         return responses;
     }
 
-    private AMRAPResultResponse getResponse(final Optional<AMRAPResult> entity) {
+    private ForTimeResponse getResponse(final Optional<ForTime> entity) {
         if (entity.isEmpty()) {
             return null;
         }
 
-        return new AMRAPResultResponse(entity.get());
+        return new ForTimeResponse(entity.get());
     }
 }

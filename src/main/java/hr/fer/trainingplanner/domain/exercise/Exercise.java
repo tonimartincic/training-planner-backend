@@ -14,4 +14,7 @@ public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public Exercise(ExerciseRequest request) {
+    }
 }
