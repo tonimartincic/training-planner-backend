@@ -49,7 +49,8 @@ public class ExerciseServiceImpl implements ExerciseService {
 
         final Exercise entity = entityFromDatabase.get();
 
-        // TODO: update data
+        entity.setName(request.getName());
+        entity.setDescription(request.getDescription());
 
         return getResponse(Optional.of(this.exerciseRepository.save(entity)));
     }

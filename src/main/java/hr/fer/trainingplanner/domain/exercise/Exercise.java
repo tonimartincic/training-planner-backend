@@ -15,6 +15,16 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
+    private String description;
+
+    public Exercise() {
+    }
+
     public Exercise(ExerciseRequest request) {
+        this.id = request.getId();
+        this.name = request.getName();
+        this.description = request.getDescription();
     }
 }

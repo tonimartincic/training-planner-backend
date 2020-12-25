@@ -6,4 +6,8 @@ import lombok.Data;
 public class ExerciseRequest {
 
     private Long id;
+
+    private String name;
+
+    private String description;
 }

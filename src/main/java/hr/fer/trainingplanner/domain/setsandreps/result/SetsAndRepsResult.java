@@ -15,6 +15,9 @@ public class SetsAndRepsResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public SetsAndRepsResult() {
+    }
+
     public SetsAndRepsResult(SetsAndRepsResultRequest request) {
     }
 }

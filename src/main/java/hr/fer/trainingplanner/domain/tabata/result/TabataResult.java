@@ -15,6 +15,9 @@ public class TabataResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public TabataResult() {
+    }
+
     public TabataResult(TabataResultRequest request) {
     }
 }

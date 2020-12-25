@@ -15,6 +15,9 @@ public class AMRAP {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public AMRAP() {
+    }
+
     public AMRAP(AMRAPRequest request) {
     }
 }

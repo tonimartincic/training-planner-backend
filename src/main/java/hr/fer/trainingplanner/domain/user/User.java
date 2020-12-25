@@ -15,6 +15,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public User() {
+    }
+
     public User(UserRequest request) {
     }
 }

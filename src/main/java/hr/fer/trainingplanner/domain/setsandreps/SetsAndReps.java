@@ -15,6 +15,17 @@ public class SetsAndReps {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int numberOfReps;
+
+    private int numberOfSets;
+
+    private int weight;
+
+    private long exerciseId;
+
+    public SetsAndReps() {
+    }
+
     public SetsAndReps(SetsAndRepsRequest request) {
     }
 }

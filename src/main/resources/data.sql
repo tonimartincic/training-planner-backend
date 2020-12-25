@@ -1,0 +1,17 @@
+Insert into exercise (name, description) values ('Barbell Bench Press', '');
+Insert into exercise (name, description) values ('Lat-pulldowns', '');
+Insert into exercise (name, description) values ('Seated Dumbbell Press', '');
+Insert into exercise (name, description) values ('Leg Extensions', '');
+Insert into exercise (name, description) values ('Barbell Bbicep Curls', '');
+Insert into exercise (name, description) values ('Triceps Rope Pushdowns', '');
+Insert into exercise (name, description) values ('Overhead Bar Extensions', '');
+Insert into exercise (name, description) values ('EZ Bar Curls', '');
+Insert into exercise (name, description) values ('Machine Chest Press', '');
+Insert into exercise (name, description) values ('T-Bar Row', '');
+Insert into exercise (name, description) values ('Lateral Raises', '');
+Insert into exercise (name, description) values ('EZ Bar Upright Rows', '');
+Insert into exercise (name, description) values ('Close-Grip Pulldowns', '');
+Insert into exercise (name, description) values ('Cable Fly', '');
+Insert into exercise (name, description) values ('Lunges', '');
+Insert into exercise (name, description) values ('Skullcrushers', '');
+Insert into exercise (name, description) values ('Hammer Curls', '');
