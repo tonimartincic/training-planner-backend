@@ -1,5 +1,6 @@
 package hr.fer.trainingplanner.controller.EMOM;
 
+import hr.fer.trainingplanner.domain.EMOM.EMOM;
 import hr.fer.trainingplanner.domain.EMOM.EMOMRequest;
 import hr.fer.trainingplanner.domain.EMOM.EMOMResponse;
 import hr.fer.trainingplanner.service.EMOM.EMOMService;
@@ -25,7 +26,10 @@ public class EMOMController {
 
     @GetMapping("/api/emom/{id}")
     public EMOMResponse getById(@PathVariable final Long id) {
-        return this.service.getById(id);
+        EMOM entity = this.service.getById(id);
+        EMOMResponse response = this.service.getResponse(entity);
+
+        return response;
     }
 
     @PostMapping("/api/emom")

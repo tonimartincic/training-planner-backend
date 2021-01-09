@@ -11,9 +11,12 @@ public class Tabata extends Workout {
 
     private String name;
 
-    public Tabata() {
-    }
+    private int work;
 
-    public Tabata(TabataRequest request) {
+    private int rest;
+
+    private int rounds;
+
+    public Tabata() {
     }
 }

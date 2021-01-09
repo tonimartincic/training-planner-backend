@@ -4,10 +4,7 @@ import com.google.common.collect.Lists;
 import hr.fer.trainingplanner.domain.AMRAP.AMRAP;
 import hr.fer.trainingplanner.domain.AMRAP.AMRAPRequest;
 import hr.fer.trainingplanner.domain.AMRAP.AMRAPResponse;
-import hr.fer.trainingplanner.domain.workout.WorkoutRequest;
-import hr.fer.trainingplanner.domain.workout.WorkoutResponse;
 import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExercise;
-import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExerciseRequest;
 import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExerciseResponse;
 import hr.fer.trainingplanner.enumeration.WorkoutType;
 import hr.fer.trainingplanner.repository.AMRAP.AMRAPRepository;
@@ -16,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,13 +37,14 @@ public class AMRAPServiceImpl implements AMRAPService {
     }
 
     @Override
-    public AMRAPResponse getById(Long id) {
-        return getResponse(this.AMRAPRepository.findById(id).orElse(null));
+    public AMRAP getById(Long id) {
+        return this.AMRAPRepository.findById(id).orElse(null);
     }
 
     @Override
     public AMRAPResponse add(AMRAPRequest request) {
         final AMRAP entity = getEntity(request);
+        entity.setCreatedOn(LocalDate.now());
         AMRAP amrap = this.AMRAPRepository.save(entity);
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
@@ -66,6 +65,7 @@ public class AMRAPServiceImpl implements AMRAPService {
         }
 
         final AMRAP entity = getEntity(request);
+        entity.setCreatedOn(entityFromDatabase.get().getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
                 entity.getId(),
@@ -82,7 +82,8 @@ public class AMRAPServiceImpl implements AMRAPService {
         this.AMRAPRepository.deleteById(id);
     }
 
-    private List<AMRAPResponse> getResponses(final List<AMRAP> entities) {
+    @Override
+    public List<AMRAPResponse> getResponses(final List<AMRAP> entities) {
         final List<AMRAPResponse> responses = new ArrayList<>();
 
         for (final AMRAP entity : entities) {
@@ -92,7 +93,8 @@ public class AMRAPServiceImpl implements AMRAPService {
         return responses;
     }
 
-    private AMRAPResponse getResponse(final AMRAP entity) {
+    @Override
+    public AMRAPResponse getResponse(final AMRAP entity) {
         if (entity == null) {
             return null;
         }
@@ -103,6 +105,7 @@ public class AMRAPServiceImpl implements AMRAPService {
         response.setType(entity.getType().getName());
         response.setName(entity.getName());
         response.setMinutes(entity.getMinutes());
+        response.setCreatedOn(entity.getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.getByWorkoutIdAndType(entity.getId(), WorkoutType.AMRAP);
         List<WorkoutExerciseResponse> workoutExerciseResponses = new ArrayList<>();
@@ -117,7 +120,8 @@ public class AMRAPServiceImpl implements AMRAPService {
         return response;
     }
 
-    private List<AMRAP> getEntities(final List<AMRAPRequest> requests) {
+    @Override
+    public List<AMRAP> getEntities(final List<AMRAPRequest> requests) {
         final List<AMRAP> entities = new ArrayList<>();
 
         for (final AMRAPRequest request : requests) {
@@ -127,7 +131,8 @@ public class AMRAPServiceImpl implements AMRAPService {
         return entities;
     }
 
-    private AMRAP getEntity(final AMRAPRequest request) {
+    @Override
+    public AMRAP getEntity(final AMRAPRequest request) {
         if (request == null) {
             return null;
         }

@@ -8,6 +8,9 @@ public class TabataResponse extends WorkoutResponse {
 
     private String name;
 
-    public TabataResponse(Tabata tabata) {
-    }
+    private int work;
+
+    private int rest;
+
+    private int rounds;
 }

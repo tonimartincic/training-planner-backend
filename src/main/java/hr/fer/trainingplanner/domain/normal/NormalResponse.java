@@ -7,7 +7,4 @@ import lombok.Data;
 public class NormalResponse extends WorkoutResponse {
 
     private String name;
-
-    public NormalResponse(Normal normal) {
-    }
 }

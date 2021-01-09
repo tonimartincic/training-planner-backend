@@ -1,5 +1,6 @@
 package hr.fer.trainingplanner.controller.AMRAP;
 
+import hr.fer.trainingplanner.domain.AMRAP.AMRAP;
 import hr.fer.trainingplanner.domain.AMRAP.AMRAPRequest;
 import hr.fer.trainingplanner.domain.AMRAP.AMRAPResponse;
 import hr.fer.trainingplanner.service.AMRAP.AMRAPService;
@@ -25,7 +26,10 @@ public class AMRAPController {
 
     @GetMapping("/api/amrap/{id}")
     public AMRAPResponse getById(@PathVariable final Long id) {
-        return this.service.getById(id);
+        AMRAP entity = this.service.getById(id);
+        AMRAPResponse response = this.service.getResponse(entity);
+
+        return response;
     }
 
     @PostMapping("/api/amrap")

@@ -1,11 +1,13 @@
 package hr.fer.trainingplanner.domain.workout;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExercise;
 import hr.fer.trainingplanner.enumeration.WorkoutType;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -19,6 +21,9 @@ public class Workout {
     private Long id;
 
     private WorkoutType type;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate createdOn;
 
     @JsonIgnore
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -1,5 +1,6 @@
 package hr.fer.trainingplanner.controller.normal;
 
+import hr.fer.trainingplanner.domain.normal.Normal;
 import hr.fer.trainingplanner.domain.normal.NormalRequest;
 import hr.fer.trainingplanner.domain.normal.NormalResponse;
 import hr.fer.trainingplanner.service.normal.NormalService;
@@ -25,7 +26,10 @@ public class NormalController {
 
     @GetMapping("/api/normal/{id}")
     public NormalResponse getById(@PathVariable final Long id) {
-        return this.service.getById(id);
+        Normal entity = this.service.getById(id);
+        NormalResponse response = this.service.getResponse(entity);
+
+        return response;
     }
 
     @PostMapping("/api/normal")

@@ -7,4 +7,8 @@ import lombok.Data;
 public class ForTimeRequest extends WorkoutRequest {
 
     private String name;
+
+    private int minutes;
+
+    private int rounds;
 }

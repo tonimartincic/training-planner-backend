@@ -7,4 +7,6 @@ import lombok.Data;
 public class EMOMRequest extends WorkoutRequest {
 
     private String name;
+
+    private int minutes;
 }

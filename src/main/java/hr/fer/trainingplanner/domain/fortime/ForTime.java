@@ -11,9 +11,10 @@ public class ForTime extends Workout {
 
     private String name;
 
-    public ForTime() {
-    }
+    private int minutes;
 
-    public ForTime(ForTimeRequest request) {
+    private int rounds;
+
+    public ForTime() {
     }
 }

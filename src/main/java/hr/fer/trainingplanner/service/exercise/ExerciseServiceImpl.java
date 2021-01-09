@@ -1,7 +1,6 @@
 package hr.fer.trainingplanner.service.exercise;
 
 import com.google.common.collect.Lists;
-import hr.fer.trainingplanner.domain.AMRAP.result.AMRAPResult;
 import hr.fer.trainingplanner.domain.exercise.Exercise;
 import hr.fer.trainingplanner.domain.exercise.ExerciseRequest;
 import hr.fer.trainingplanner.domain.exercise.ExerciseResponse;

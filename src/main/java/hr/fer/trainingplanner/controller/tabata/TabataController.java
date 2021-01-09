@@ -1,5 +1,6 @@
 package hr.fer.trainingplanner.controller.tabata;
 
+import hr.fer.trainingplanner.domain.tabata.Tabata;
 import hr.fer.trainingplanner.domain.tabata.TabataRequest;
 import hr.fer.trainingplanner.domain.tabata.TabataResponse;
 import hr.fer.trainingplanner.service.tabata.TabataService;
@@ -25,7 +26,10 @@ public class TabataController {
 
     @GetMapping("/api/tabata/{id}")
     public TabataResponse getById(@PathVariable final Long id) {
-        return this.service.getById(id);
+        Tabata entity = this.service.getById(id);
+        TabataResponse response = this.service.getResponse(entity);
+
+        return response;
     }
 
     @PostMapping("/api/tabata")

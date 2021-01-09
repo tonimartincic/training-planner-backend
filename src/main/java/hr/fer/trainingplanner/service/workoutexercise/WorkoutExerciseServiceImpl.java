@@ -7,7 +7,7 @@ import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExercise;
 import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExerciseRequest;
 import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExerciseResponse;
 import hr.fer.trainingplanner.enumeration.WorkoutType;
-import hr.fer.trainingplanner.repository.exercise.WorkoutExerciseRepository;
+import hr.fer.trainingplanner.repository.workoutexercise.WorkoutExerciseRepository;
 import hr.fer.trainingplanner.service.exercise.ExerciseService;
 import hr.fer.trainingplanner.service.workout.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;

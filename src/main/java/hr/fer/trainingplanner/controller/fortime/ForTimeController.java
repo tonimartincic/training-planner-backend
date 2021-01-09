@@ -1,5 +1,6 @@
 package hr.fer.trainingplanner.controller.fortime;
 
+import hr.fer.trainingplanner.domain.fortime.ForTime;
 import hr.fer.trainingplanner.domain.fortime.ForTimeRequest;
 import hr.fer.trainingplanner.domain.fortime.ForTimeResponse;
 import hr.fer.trainingplanner.service.fortime.ForTimeService;
@@ -25,7 +26,10 @@ public class ForTimeController {
 
     @GetMapping("/api/for-time/{id}")
     public ForTimeResponse getById(@PathVariable final Long id) {
-        return this.service.getById(id);
+        ForTime entity = this.service.getById(id);
+        ForTimeResponse response = this.service.getResponse(entity);
+
+        return response;
     }
 
     @PostMapping("/api/for-time")

@@ -8,6 +8,5 @@ public class EMOMResponse extends WorkoutResponse {
 
     private String name;
 
-    public EMOMResponse(EMOM emom) {
-    }
+    private int minutes;
 }

@@ -8,6 +8,7 @@ public class ForTimeResponse extends WorkoutResponse {
 
     private String name;
 
-    public ForTimeResponse(ForTime forTime) {
-    }
+    private int minutes;
+
+    private int rounds;
 }

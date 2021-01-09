@@ -9,5 +9,5 @@ public interface WorkoutService {
 
     List<Workout> getAll();
 
-    Workout  getByWorkoutIdAndType(long workoutId, WorkoutType workoutType);
+    Workout getByWorkoutIdAndType(long workoutId, WorkoutType workoutType);
 }

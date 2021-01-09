@@ -1,4 +1,4 @@
-package hr.fer.trainingplanner.repository.exercise;
+package hr.fer.trainingplanner.repository.workoutexercise;
 
 import hr.fer.trainingplanner.domain.workout.Workout;
 import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExercise;

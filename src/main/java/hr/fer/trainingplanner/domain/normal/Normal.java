@@ -13,7 +13,4 @@ public class Normal extends Workout {
 
     public Normal() {
     }
-
-    public Normal(NormalRequest request) {
-    }
 }

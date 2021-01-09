@@ -7,12 +7,12 @@ import hr.fer.trainingplanner.repository.AMRAP.AMRAPRepository;
 import hr.fer.trainingplanner.repository.EMOM.EMOMRepository;
 import hr.fer.trainingplanner.repository.fortime.ForTimeRepository;
 import hr.fer.trainingplanner.repository.normal.NormalRepository;
-import hr.fer.trainingplanner.repository.setsandreps.SetsAndRepsRepository;
 import hr.fer.trainingplanner.repository.tabata.TabataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -26,8 +26,6 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     private NormalRepository normalRepository;
 
-    private SetsAndRepsRepository setsAndRepsRepository;
-
     private TabataRepository tabataRepository;
 
     @Autowired
@@ -36,13 +34,11 @@ public class WorkoutServiceImpl implements WorkoutService {
             final EMOMRepository emomRepository,
             final ForTimeRepository forTimeRepository,
             final NormalRepository normalRepository,
-            final SetsAndRepsRepository setsAndRepsRepository,
             final TabataRepository tabataRepository) {
         this.amrapRepository = amrapRepository;
         this.emomRepository = emomRepository;
         this.forTimeRepository = forTimeRepository;
         this.normalRepository = normalRepository;
-        this.setsAndRepsRepository = setsAndRepsRepository;
         this.tabataRepository = tabataRepository;
     }
 
@@ -54,9 +50,9 @@ public class WorkoutServiceImpl implements WorkoutService {
         workouts.addAll(Lists.newArrayList(this.emomRepository.findAll()));
         workouts.addAll(Lists.newArrayList(this.forTimeRepository.findAll()));
         workouts.addAll(Lists.newArrayList(this.normalRepository.findAll()));
-        workouts.addAll(Lists.newArrayList(this.setsAndRepsRepository.findAll()));
         workouts.addAll(Lists.newArrayList(this.tabataRepository.findAll()));
 
+        workouts.sort(Comparator.comparing(Workout::getCreatedOn).reversed());
         return workouts;
     }
 
@@ -70,8 +66,6 @@ public class WorkoutServiceImpl implements WorkoutService {
             return this.forTimeRepository.findById(workoutId).orElse(null);
         } else if (workoutType.equals(WorkoutType.NORMAL)) {
             return this.normalRepository.findById(workoutId).orElse(null);
-        } else if (workoutType.equals(WorkoutType.SETS_AND_REPS)) {
-            return this.setsAndRepsRepository.findById(workoutId).orElse(null);
         } else {
             return this.tabataRepository.findById(workoutId).orElse(null);
         }

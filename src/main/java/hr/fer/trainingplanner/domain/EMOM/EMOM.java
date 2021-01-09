@@ -11,9 +11,8 @@ public class EMOM extends Workout {
 
     private String name;
 
-    public EMOM() {
-    }
+    private int minutes;
 
-    public EMOM(EMOMRequest request) {
+    public EMOM() {
     }
 }

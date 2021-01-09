@@ -7,4 +7,10 @@ import lombok.Data;
 public class TabataRequest extends WorkoutRequest {
 
     private String name;
+
+    private int work;
+
+    private int rest;
+
+    private int rounds;
 }

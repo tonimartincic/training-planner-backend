@@ -6,8 +6,7 @@ public enum WorkoutType {
     EMOM(2L, "EMOM"),
     FOR_TIME(3L, "For time"),
     NORMAL(4L, "Normal"),
-    SETS_AND_REPS(5L, "Sets and reps"),
-    TABATA(6L, "Tabata");
+    TABATA(5L, "Tabata");
 
     private final Long id;
 
@@ -36,8 +35,6 @@ public enum WorkoutType {
                 return WorkoutType.FOR_TIME;
             case "Normal":
                 return WorkoutType.NORMAL;
-            case "Sets and reps":
-                return WorkoutType.SETS_AND_REPS;
             default:
                 return WorkoutType.TABATA;
         }
