@@ -1,11 +1,11 @@
 package hr.fer.trainingplanner.domain.exercise;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import hr.fer.trainingplanner.domain.workoutexercise.WorkoutExercise;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,12 +19,10 @@ public class Exercise {
 
     private String description;
 
-    public Exercise() {
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<WorkoutExercise> exercises;
 
-    public Exercise(ExerciseRequest request) {
-        this.id = request.getId();
-        this.name = request.getName();
-        this.description = request.getDescription();
+    public Exercise() {
     }
 }

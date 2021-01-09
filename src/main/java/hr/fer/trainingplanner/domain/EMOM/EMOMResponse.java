@@ -1,11 +1,12 @@
 package hr.fer.trainingplanner.domain.EMOM;
 
+import hr.fer.trainingplanner.domain.workout.WorkoutResponse;
 import lombok.Data;
 
 @Data
-public class EMOMResponse {
+public class EMOMResponse extends WorkoutResponse {
 
-    private Long id;
+    private String name;
 
     public EMOMResponse(EMOM emom) {
     }

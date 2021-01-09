@@ -11,9 +11,6 @@ public class ExerciseResponse {
 
     private String description;
 
-    public ExerciseResponse(Exercise exercise) {
-        this.id = exercise.getId();
-        this.name = exercise.getName();
-        this.description = exercise.getDescription();
+    public ExerciseResponse() {
     }
 }

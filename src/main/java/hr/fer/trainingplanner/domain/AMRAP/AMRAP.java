@@ -1,23 +1,18 @@
 package hr.fer.trainingplanner.domain.AMRAP;
 
+import hr.fer.trainingplanner.domain.workout.Workout;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
-public class AMRAP {
+public class AMRAP extends Workout {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String name;
+
+    private int minutes;
 
     public AMRAP() {
-    }
-
-    public AMRAP(AMRAPRequest request) {
     }
 }

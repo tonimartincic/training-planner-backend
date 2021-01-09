@@ -1,10 +1,10 @@
-package hr.fer.trainingplanner.domain.tabata;
+package hr.fer.trainingplanner.domain.normal;
 
 import hr.fer.trainingplanner.domain.workout.WorkoutRequest;
 import lombok.Data;
 
 @Data
-public class TabataRequest extends WorkoutRequest {
+public class NormalRequest extends WorkoutRequest {
 
     private String name;
 }

@@ -1,11 +1,12 @@
 package hr.fer.trainingplanner.domain.setsandreps;
 
+import hr.fer.trainingplanner.domain.workout.WorkoutResponse;
 import lombok.Data;
 
 @Data
-public class SetsAndRepsResponse {
+public class SetsAndRepsResponse extends WorkoutResponse {
 
-    private Long id;
+    private String name;
 
     public SetsAndRepsResponse(SetsAndReps setsAndReps) {
     }

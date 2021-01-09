@@ -1,5 +1,6 @@
 package hr.fer.trainingplanner.service.exercise;
 
+import hr.fer.trainingplanner.domain.exercise.Exercise;
 import hr.fer.trainingplanner.domain.exercise.ExerciseRequest;
 import hr.fer.trainingplanner.domain.exercise.ExerciseResponse;
 
@@ -15,4 +16,6 @@ public interface ExerciseService {
     ExerciseResponse edit(ExerciseRequest request);
 
     void deleteById(Long id);
+
+    Exercise getOrCreateExerciseByName(String name);
 }
