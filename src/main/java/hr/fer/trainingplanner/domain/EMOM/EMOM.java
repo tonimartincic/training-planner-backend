@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 @Entity
 public class EMOM extends Workout {
 
-    private String name;
-
     private int minutes;
 
     public EMOM() {

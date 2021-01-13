@@ -11,6 +11,8 @@ public class WorkoutRequest {
 
     private Long id;
 
+    private String name;
+
     private List<WorkoutExerciseRequest> workoutExerciseRequests;
 
     public WorkoutRequest() {

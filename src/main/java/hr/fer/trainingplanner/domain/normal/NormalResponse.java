@@ -5,6 +5,4 @@ import lombok.Data;
 
 @Data
 public class NormalResponse extends WorkoutResponse {
-
-    private String name;
 }

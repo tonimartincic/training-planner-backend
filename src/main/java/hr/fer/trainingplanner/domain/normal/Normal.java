@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 @Entity
 public class Normal extends Workout {
 
-    private String name;
-
     public Normal() {
     }
 }

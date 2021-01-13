@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Entity
 public class AMRAP extends Workout {
 
-    private String name;
-
     private int minutes;
 
     public AMRAP() {

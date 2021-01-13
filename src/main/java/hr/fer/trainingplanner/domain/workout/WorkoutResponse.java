@@ -12,6 +12,8 @@ public class WorkoutResponse {
 
     private Long id;
 
+    private String name;
+
     private String type;
 
     @JsonFormat(pattern = "dd-MM-yyyy")

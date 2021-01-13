@@ -20,6 +20,8 @@ public class Workout {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    private String name;
+
     private WorkoutType type;
 
     @JsonFormat(pattern = "dd-MM-yyyy")

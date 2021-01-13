@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 @Entity
 public class Tabata extends Workout {
 
-    private String name;
-
     private int work;
 
     private int rest;

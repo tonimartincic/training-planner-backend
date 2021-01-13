@@ -6,7 +6,5 @@ import lombok.Data;
 @Data
 public class AMRAPResponse extends WorkoutResponse {
 
-    private String name;
-
     private int minutes;
 }

@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 @Entity
 public class ForTime extends Workout {
 
-    private String name;
-
     private int minutes;
 
     private int rounds;

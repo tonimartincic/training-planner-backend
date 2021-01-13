@@ -2,11 +2,11 @@ package hr.fer.trainingplanner.enumeration;
 
 public enum WorkoutType {
 
-    AMRAP(1L, "AMRAP"),
-    EMOM(2L, "EMOM"),
-    FOR_TIME(3L, "For time"),
-    NORMAL(4L, "Normal"),
-    TABATA(5L, "Tabata");
+    AMRAP(1L, "amrap"),
+    EMOM(2L, "emom"),
+    FOR_TIME(3L, "for time"),
+    NORMAL(4L, "normal"),
+    TABATA(5L, "tabata");
 
     private final Long id;
 
@@ -27,13 +27,13 @@ public enum WorkoutType {
 
     public static WorkoutType getByName(final String name) {
         switch (name) {
-            case "AMRAP":
+            case "amrap":
                 return WorkoutType.AMRAP;
-            case "EMOM":
+            case "emom":
                 return WorkoutType.EMOM;
-            case "For time":
+            case "forTime":
                 return WorkoutType.FOR_TIME;
-            case "Normal":
+            case "normal":
                 return WorkoutType.NORMAL;
             default:
                 return WorkoutType.TABATA;
