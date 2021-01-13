@@ -1,5 +1,7 @@
 package hr.fer.trainingplanner.service.user;
 
+import hr.fer.trainingplanner.domain.register.RegisterRequest;
+import hr.fer.trainingplanner.domain.register.RegisterResponse;
 import hr.fer.trainingplanner.domain.user.UserRequest;
 import hr.fer.trainingplanner.domain.user.UserResponse;
 
@@ -15,4 +17,6 @@ public interface UserService {
     UserResponse edit(UserRequest request);
 
     void deleteById(Long id);
+
+    RegisterResponse register(RegisterRequest request);
 }

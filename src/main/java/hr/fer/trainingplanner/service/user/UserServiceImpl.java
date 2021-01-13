@@ -1,6 +1,8 @@
 package hr.fer.trainingplanner.service.user;
 
 import com.google.common.collect.Lists;
+import hr.fer.trainingplanner.domain.register.RegisterRequest;
+import hr.fer.trainingplanner.domain.register.RegisterResponse;
 import hr.fer.trainingplanner.domain.user.User;
 import hr.fer.trainingplanner.domain.user.UserRequest;
 import hr.fer.trainingplanner.domain.user.UserResponse;
@@ -56,6 +58,33 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         this.userRepository.deleteById(id);
+    }
+
+    @Override
+    public RegisterResponse register(RegisterRequest request) {
+        if (request.getPassword() == null
+                || request.getPassword().isEmpty()
+                || request.getConfirmPassword() == null
+                || request.getConfirmPassword().isEmpty()
+                || !request.getPassword().equals(request.getConfirmPassword())) {
+            throw new IllegalArgumentException("Invalid password data");
+        }
+
+        User user = new User();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+
+        user = this.userRepository.save(user);
+
+        RegisterResponse registerResponse = new RegisterResponse();
+        registerResponse.setUserId(user.getId());
+        registerResponse.setFirstName(user.getFirstName());
+        registerResponse.setLastName(user.getLastName());
+        registerResponse.setEmail(user.getEmail());
+
+        return registerResponse;
     }
 
     private List<UserResponse> getResponses(final List<User> entities) {
