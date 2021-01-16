@@ -70,6 +70,11 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Invalid password data");
         }
 
+        User existingUser = this.userRepository.findByEmail(request.getEmail());
+        if (existingUser != null) {
+            throw new IllegalArgumentException("User for given email already exists");
+        }
+
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
