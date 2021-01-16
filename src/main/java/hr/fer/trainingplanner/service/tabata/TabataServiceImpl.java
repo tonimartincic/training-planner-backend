@@ -44,7 +44,6 @@ public class TabataServiceImpl implements TabataService {
     @Override
     public TabataResponse add(TabataRequest request) {
         final Tabata entity = getEntity(request);
-        entity.setCreatedOn(LocalDate.now());
         Tabata entityFromDatabase = this.tabataRepository.save(entity);
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
@@ -65,7 +64,6 @@ public class TabataServiceImpl implements TabataService {
         }
 
         final Tabata entity = getEntity(request);
-        entity.setCreatedOn(entityFromDatabase.get().getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
                 entity.getId(),
@@ -112,7 +110,7 @@ public class TabataServiceImpl implements TabataService {
         response.setWork(entity.getWork());
         response.setRest(entity.getRest());
         response.setRounds(entity.getRounds());
-        response.setCreatedOn(entity.getCreatedOn());
+        response.setDate(entity.getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.getByWorkoutIdAndType(entity.getId(), WorkoutType.TABATA);
         List<WorkoutExerciseResponse> workoutExerciseResponses = new ArrayList<>();
@@ -155,6 +153,7 @@ public class TabataServiceImpl implements TabataService {
         entity.setWork(request.getWork());
         entity.setRest(request.getRest());
         entity.setRounds(request.getRounds());
+        entity.setCreatedOn(request.getDate());
 
         return entity;
     }

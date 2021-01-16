@@ -44,7 +44,6 @@ public class ForTimeServiceImpl implements ForTimeService {
     @Override
     public ForTimeResponse add(ForTimeRequest request) {
         final ForTime entity = getEntity(request);
-        entity.setCreatedOn(LocalDate.now());
         ForTime entityFromDatabase = this.forTimeRepository.save(entity);
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
@@ -65,7 +64,6 @@ public class ForTimeServiceImpl implements ForTimeService {
         }
 
         final ForTime entity = getEntity(request);
-        entity.setCreatedOn(entityFromDatabase.get().getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
                 entity.getId(),
@@ -111,7 +109,7 @@ public class ForTimeServiceImpl implements ForTimeService {
         response.setName(entity.getName());
         response.setMinutes(entity.getMinutes());
         response.setRounds(entity.getRounds());
-        response.setCreatedOn(entity.getCreatedOn());
+        response.setDate(entity.getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.getByWorkoutIdAndType(entity.getId(), WorkoutType.FOR_TIME);
         List<WorkoutExerciseResponse> workoutExerciseResponses = new ArrayList<>();
@@ -153,6 +151,7 @@ public class ForTimeServiceImpl implements ForTimeService {
         entity.setName(request.getName());
         entity.setMinutes(request.getMinutes());
         entity.setRounds(request.getRounds());
+        entity.setCreatedOn(request.getDate());
 
         return entity;
     }

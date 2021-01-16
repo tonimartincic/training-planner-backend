@@ -44,7 +44,6 @@ public class EMOMServiceImpl implements EMOMService {
     @Override
     public EMOMResponse add(EMOMRequest request) {
         final EMOM entity = getEntity(request);
-        entity.setCreatedOn(LocalDate.now());
         EMOM entityFromDatabase = this.EMOMRepository.save(entity);
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
@@ -65,7 +64,6 @@ public class EMOMServiceImpl implements EMOMService {
         }
 
         final EMOM entity = getEntity(request);
-        entity.setCreatedOn(entityFromDatabase.get().getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
                 entity.getId(),
@@ -110,7 +108,7 @@ public class EMOMServiceImpl implements EMOMService {
         response.setType(entity.getType().getName());
         response.setName(entity.getName());
         response.setMinutes(entity.getMinutes());
-        response.setCreatedOn(entity.getCreatedOn());
+        response.setDate(entity.getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.getByWorkoutIdAndType(entity.getId(), WorkoutType.EMOM);
         List<WorkoutExerciseResponse> workoutExerciseResponses = new ArrayList<>();
@@ -151,6 +149,7 @@ public class EMOMServiceImpl implements EMOMService {
         entity.setType(WorkoutType.EMOM);
         entity.setName(request.getName());
         entity.setMinutes(request.getMinutes());
+        entity.setCreatedOn(request.getDate());
 
         return entity;
     }

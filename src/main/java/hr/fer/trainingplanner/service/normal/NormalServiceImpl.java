@@ -44,7 +44,6 @@ public class NormalServiceImpl implements NormalService {
     @Override
     public NormalResponse add(NormalRequest request) {
         final Normal entity = getEntity(request);
-        entity.setCreatedOn(LocalDate.now());
         Normal entityFromDatabase = this.repository.save(entity);
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
@@ -65,7 +64,6 @@ public class NormalServiceImpl implements NormalService {
         }
 
         final Normal entity = getEntity(request);
-        entity.setCreatedOn(entityFromDatabase.get().getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
                 entity.getId(),
@@ -109,7 +107,7 @@ public class NormalServiceImpl implements NormalService {
         response.setId(entity.getId());
         response.setType(entity.getType().getName());
         response.setName(entity.getName());
-        response.setCreatedOn(entity.getCreatedOn());
+        response.setDate(entity.getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.getByWorkoutIdAndType(entity.getId(), WorkoutType.NORMAL);
         List<WorkoutExerciseResponse> workoutExerciseResponses = new ArrayList<>();
@@ -149,6 +147,7 @@ public class NormalServiceImpl implements NormalService {
 
         entity.setType(WorkoutType.NORMAL);
         entity.setName(request.getName());
+        entity.setCreatedOn(request.getDate());
 
         return entity;
     }

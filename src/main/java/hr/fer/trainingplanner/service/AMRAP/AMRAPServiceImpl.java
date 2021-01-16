@@ -44,7 +44,6 @@ public class AMRAPServiceImpl implements AMRAPService {
     @Override
     public AMRAPResponse add(AMRAPRequest request) {
         final AMRAP entity = getEntity(request);
-        entity.setCreatedOn(LocalDate.now());
         AMRAP amrap = this.AMRAPRepository.save(entity);
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
@@ -65,7 +64,6 @@ public class AMRAPServiceImpl implements AMRAPService {
         }
 
         final AMRAP entity = getEntity(request);
-        entity.setCreatedOn(entityFromDatabase.get().getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.addWorkoutExercises(
                 entity.getId(),
@@ -110,7 +108,7 @@ public class AMRAPServiceImpl implements AMRAPService {
         response.setType(entity.getType().getName());
         response.setName(entity.getName());
         response.setMinutes(entity.getMinutes());
-        response.setCreatedOn(entity.getCreatedOn());
+        response.setDate(entity.getCreatedOn());
 
         List<WorkoutExercise> workoutExercises = this.workoutExerciseService.getByWorkoutIdAndType(entity.getId(), WorkoutType.AMRAP);
         List<WorkoutExerciseResponse> workoutExerciseResponses = new ArrayList<>();
@@ -151,6 +149,7 @@ public class AMRAPServiceImpl implements AMRAPService {
         entity.setType(WorkoutType.AMRAP);
         entity.setName(request.getName());
         entity.setMinutes(request.getMinutes());
+        entity.setCreatedOn(request.getDate());
 
         return entity;
     }

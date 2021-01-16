@@ -24,7 +24,7 @@ public class Workout {
 
     private WorkoutType type;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdOn;
 
     @JsonIgnore

@@ -16,8 +16,8 @@ public class WorkoutResponse {
 
     private String type;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate createdOn;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
     private List<WorkoutExerciseResponse> exercises;
 }
