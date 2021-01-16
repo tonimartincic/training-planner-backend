@@ -1,6 +1,8 @@
 package hr.fer.trainingplanner.service.user;
 
 import com.google.common.collect.Lists;
+import hr.fer.trainingplanner.domain.login.LoginRequest;
+import hr.fer.trainingplanner.domain.login.LoginResponse;
 import hr.fer.trainingplanner.domain.register.RegisterRequest;
 import hr.fer.trainingplanner.domain.register.RegisterResponse;
 import hr.fer.trainingplanner.domain.user.User;
@@ -95,6 +97,30 @@ public class UserServiceImpl implements UserService {
         registerResponse.setEmail(user.getEmail());
 
         return registerResponse;
+    }
+
+    @Override
+    public LoginResponse login(LoginRequest request) {
+        if (request.getPassword() == null
+                || request.getPassword().isEmpty()
+                || request.getEmail() == null
+                || request.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("Invalid email and password data");
+        }
+
+        User user = this.userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
+
+        if (user == null) {
+            throw new IllegalArgumentException("Invalid email and password data");
+        }
+
+        LoginResponse response = new LoginResponse();
+        response.setUserId(user.getId());
+        response.setFirstName(user.getFirstName());
+        response.setLastName(user.getLastName());
+        response.setEmail(user.getEmail());
+
+        return response;
     }
 
     private List<UserResponse> getResponses(final List<User> entities) {

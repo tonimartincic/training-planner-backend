@@ -1,6 +1,5 @@
 package hr.fer.trainingplanner.controller;
 
-import hr.fer.trainingplanner.domain.tabata.TabataResponse;
 import hr.fer.trainingplanner.domain.user.UserRequest;
 import hr.fer.trainingplanner.domain.user.UserResponse;
 import hr.fer.trainingplanner.service.user.UserService;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
