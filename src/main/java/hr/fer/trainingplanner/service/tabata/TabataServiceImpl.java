@@ -38,7 +38,7 @@ public class TabataServiceImpl implements TabataService {
 
     @Override
     public Tabata getById(Long id) {
-        return this.tabataRepository.findById(id).orElse(null);
+        return this.tabataRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -79,6 +79,11 @@ public class TabataServiceImpl implements TabataService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<Tabata> entity = this.tabataRepository.findById(id);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
         this.tabataRepository.deleteById(id);
     }
 

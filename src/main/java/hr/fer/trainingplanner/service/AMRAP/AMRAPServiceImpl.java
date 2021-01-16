@@ -38,7 +38,7 @@ public class AMRAPServiceImpl implements AMRAPService {
 
     @Override
     public AMRAP getById(Long id) {
-        return this.AMRAPRepository.findById(id).orElse(null);
+        return this.AMRAPRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -79,6 +79,11 @@ public class AMRAPServiceImpl implements AMRAPService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<AMRAP> entity = this.AMRAPRepository.findById(id);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
         this.AMRAPRepository.deleteById(id);
     }
 

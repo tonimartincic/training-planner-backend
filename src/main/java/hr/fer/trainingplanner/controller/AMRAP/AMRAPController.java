@@ -5,9 +5,11 @@ import hr.fer.trainingplanner.domain.AMRAP.AMRAPRequest;
 import hr.fer.trainingplanner.domain.AMRAP.AMRAPResponse;
 import hr.fer.trainingplanner.service.AMRAP.AMRAPService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 public class AMRAPController {
@@ -20,30 +22,51 @@ public class AMRAPController {
     }
 
     @GetMapping("/api/amrap")
-    public List<AMRAPResponse> getAll() {
-        return this.service.getAll();
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(this.service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/api/amrap/{id}")
-    public AMRAPResponse getById(@PathVariable final Long id) {
-        AMRAP entity = this.service.getById(id);
-        AMRAPResponse response = this.service.getResponse(entity);
-
-        return response;
+    public ResponseEntity<?> getById(@PathVariable final Long id) {
+        AMRAPResponse response;
+        try{
+            AMRAP entity = this.service.getById(id);
+            response = this.service.getResponse(entity);
+        } catch (IllegalArgumentException | NoSuchElementException ex){
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/api/amrap")
-    public AMRAPResponse add(@RequestBody final AMRAPRequest request) {
-        return this.service.add(request);
+    public ResponseEntity<?> add(@RequestBody final AMRAPRequest request) {
+        AMRAPResponse response;
+        try{
+            response = this.service.add(request);
+        } catch (IllegalArgumentException ex){
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/api/amrap")
-    public AMRAPResponse edit(@RequestBody final AMRAPRequest request) {
-        return this.service.edit(request);
+    public ResponseEntity<?> edit(@RequestBody final AMRAPRequest request) {
+        AMRAPResponse response;
+        try{
+            response = this.service.edit(request);
+        } catch (IllegalArgumentException ex){
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/api/amrap/{id}")
-    public void delete(@PathVariable final Long id) {
-        this.service.deleteById(id);
+    public ResponseEntity<?> delete(@PathVariable final Long id) {
+        try {
+            this.service.deleteById(id);
+        } catch (IllegalArgumentException ex){
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

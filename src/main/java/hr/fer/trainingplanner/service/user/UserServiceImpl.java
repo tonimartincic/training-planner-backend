@@ -57,6 +57,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<User> entity = this.userRepository.findById(id);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
         this.userRepository.deleteById(id);
     }
 

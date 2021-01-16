@@ -38,7 +38,7 @@ public class ForTimeServiceImpl implements ForTimeService {
 
     @Override
     public ForTime getById(Long id) {
-        return this.forTimeRepository.findById(id).orElse(null);
+        return this.forTimeRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -79,6 +79,11 @@ public class ForTimeServiceImpl implements ForTimeService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<ForTime> entity = this.forTimeRepository.findById(id);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
         this.forTimeRepository.deleteById(id);
     }
 

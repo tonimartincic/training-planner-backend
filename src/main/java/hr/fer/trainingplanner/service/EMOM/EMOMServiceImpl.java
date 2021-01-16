@@ -38,7 +38,7 @@ public class EMOMServiceImpl implements EMOMService {
 
     @Override
     public EMOM getById(Long id) {
-        return this.EMOMRepository.findById(id).orElse(null);
+        return this.EMOMRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -79,6 +79,11 @@ public class EMOMServiceImpl implements EMOMService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<EMOM> entity = this.EMOMRepository.findById(id);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
         this.EMOMRepository.deleteById(id);
     }
 

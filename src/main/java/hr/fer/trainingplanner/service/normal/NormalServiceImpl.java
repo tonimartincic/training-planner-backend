@@ -38,7 +38,7 @@ public class NormalServiceImpl implements NormalService {
 
     @Override
     public Normal getById(Long id) {
-        return this.repository.findById(id).orElse(null);
+        return this.repository.findById(id).orElseThrow();
     }
 
     @Override
@@ -79,6 +79,11 @@ public class NormalServiceImpl implements NormalService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<Normal> entity = this.repository.findById(id);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
         this.repository.deleteById(id);
     }
 

@@ -30,7 +30,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseResponse getById(Long id) {
-        return getResponse(this.exerciseRepository.findById(id).orElse(null));
+        return getResponse(this.exerciseRepository.findById(id).orElseThrow());
     }
 
     @Override
@@ -56,6 +56,11 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<Exercise> entity = this.exerciseRepository.findById(id);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
         this.exerciseRepository.deleteById(id);
     }
 

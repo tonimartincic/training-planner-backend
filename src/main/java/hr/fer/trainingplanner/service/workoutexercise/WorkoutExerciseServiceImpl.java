@@ -41,7 +41,7 @@ public class WorkoutExerciseServiceImpl implements WorkoutExerciseService {
 
     @Override
     public WorkoutExercise getById(Long id) {
-        return this.repository.findById(id).orElse(null);
+        return this.repository.findById(id).orElseThrow();
     }
 
     @Override
@@ -69,6 +69,11 @@ public class WorkoutExerciseServiceImpl implements WorkoutExerciseService {
 
     @Override
     public void deleteById(Long id) {
+        Optional<WorkoutExercise> entity = this.repository.findById(id);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("Entity not found");
+        }
+
         this.repository.deleteById(id);
     }
 

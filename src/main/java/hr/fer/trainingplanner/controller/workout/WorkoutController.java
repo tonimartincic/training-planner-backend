@@ -15,6 +15,8 @@ import hr.fer.trainingplanner.service.normal.NormalService;
 import hr.fer.trainingplanner.service.tabata.TabataService;
 import hr.fer.trainingplanner.service.workout.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,7 +55,7 @@ public class WorkoutController {
     }
 
     @GetMapping("/api/workout")
-    public List<WorkoutResponse> getAll() {
+    public ResponseEntity<?> getAll() {
         List<Workout> workouts = this.workoutService.getAll();
 
         List<WorkoutResponse> workoutResponses = new ArrayList<>();
@@ -76,6 +78,6 @@ public class WorkoutController {
             }
         }
 
-        return workoutResponses;
+        return new ResponseEntity<>(workoutResponses, HttpStatus.OK);
     }
 }
